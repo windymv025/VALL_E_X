@@ -22,7 +22,7 @@ else:
 os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 
 import langid
-langid.set_languages(['en', 'zh', 'ja'])
+langid.set_languages(['en', 'zh', 'ja', 'vi'])
 
 import nltk
 nltk.data.path = nltk.data.path + [os.path.join(os.getcwd(), "nltk_data")]

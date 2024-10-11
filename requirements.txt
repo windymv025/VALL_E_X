@@ -22,3 +22,7 @@ nltk
 sudachipy
 sudachidict_core
 vocos
+vinorm
+underthesea
+eng_to_ipa
+viphoneme
