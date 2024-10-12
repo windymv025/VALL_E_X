@@ -26,6 +26,8 @@ python3 bin/trainer.py \
     --dtype "bfloat16" \
 """
 import warnings
+from fileinput import filename
+
 warnings.filterwarnings("ignore")
 import argparse
 import copy
@@ -269,6 +271,11 @@ def get_parser():
         default='/home/ubuntu/VALL-E-X/JS_Dataset/JS_Dataset/valid_tune'
     )
 
+    parser.add_argument(
+        "--checkpoint_path",
+        default=None
+    )
+
     add_model_arguments(parser)
 
     return parser
@@ -355,7 +362,9 @@ def load_checkpoint_if_available(
     Returns:
       Return a dict containing previously saved training info.
     """
-    if params.start_batch > 0:
+    if params.checkpoint_path is not None:
+        filename = params.checkpoint_path
+    elif params.start_batch > 0:
         filename = params.exp_dir / f"checkpoint-{params.start_batch}.pt"
     elif params.start_epoch > 1:
         filename = params.exp_dir / f"epoch-{params.start_epoch-1}.pt"
