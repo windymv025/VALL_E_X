@@ -234,7 +234,7 @@ def collate(batch):
 def create_dataloader(data_dir="/root/valle/egs/mix", n_gpus=1, rank=0, num_workers=0, num_buckets=10, max_duration=120):
     train_dataset = AudioDataset(h5_path=f"{data_dir}/audio_sum.hdf5",
                                  ann_path=f"{data_dir}/audio_ann_sum.txt",
-                                 tokenizer_path=f"{data_dir}/bpe_69.json")
+                                 tokenizer_path=f"{data_dir}/bpe_175.json")
     ran_sampler = torch.utils.data.distributed.DistributedSampler(
             train_dataset,
             num_replicas=n_gpus,

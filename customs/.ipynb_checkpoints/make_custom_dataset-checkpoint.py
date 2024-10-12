@@ -19,12 +19,12 @@ from data.tokenizer import (
     tokenize_audio,
 )
 
-tokenizer_path = "./utils/g2p/bpe_69.json"
+tokenizer_path = "./utils/g2p/bpe_175.json"
 tokenizer = PhonemeBpeTokenizer(tokenizer_path)
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 def make_prompts(name, audio_prompt_path, transcript=None):
-    text_tokenizer = PhonemeBpeTokenizer(tokenizer_path="./utils/g2p/bpe_69.json")
+    text_tokenizer = PhonemeBpeTokenizer(tokenizer_path="./utils/g2p/bpe_175.json")
     text_collater = get_text_token_collater()
     codec = AudioTokenizer(device)
     wav_pr, sr = torchaudio.load(audio_prompt_path)

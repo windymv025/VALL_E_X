@@ -16,7 +16,7 @@ from utils.g2p import PhonemeBpeTokenizer
 
 from macros import *
 
-text_tokenizer = PhonemeBpeTokenizer(tokenizer_path="./utils/g2p/bpe_69.json")
+text_tokenizer = PhonemeBpeTokenizer(tokenizer_path="./utils/g2p/bpe_175.json")
 text_collater = get_text_token_collater()
 
 device = torch.device("cpu")
