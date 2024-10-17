@@ -33,7 +33,7 @@ if torch.cuda.is_available():
 
 url = 'https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt'
 
-checkpoints_dir = "./checkpoints/"
+checkpoints_dir = "/checkpoints/"
 
 model_checkpoint_name = "vallex-checkpoint.pt"
 
@@ -43,7 +43,7 @@ codec = None
 
 vocos = None
 
-text_tokenizer = PhonemeBpeTokenizer(tokenizer_path="./utils/g2p/bpe_175.json")
+text_tokenizer = PhonemeBpeTokenizer(tokenizer_path="/utils/g2p/bpe_175.json")
 text_collater = get_text_token_collater()
 
 def preload_models():
@@ -56,7 +56,7 @@ def preload_models():
                 "Downloading model from https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt ...")
             # download from https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt to ./checkpoints/vallex-checkpoint.pt
             wget.download("https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt",
-                          out="./checkpoints/vallex-checkpoint.pt", bar=wget.bar_adaptive)
+                          out="/checkpoints/vallex-checkpoint.pt", bar=wget.bar_adaptive)
         except Exception as e:
             logging.info(e)
             raise Exception(
@@ -102,9 +102,9 @@ def generate_audio(text, prompt=None, language='auto', accent='no-accent'):
     if prompt is not None:
         prompt_path = prompt
         if not os.path.exists(prompt_path):
-            prompt_path = "./presets/" + prompt + ".npz"
+            prompt_path = "/presets/" + prompt + ".npz"
         if not os.path.exists(prompt_path):
-            prompt_path = "./customs/" + prompt + ".npz"
+            prompt_path = "/customs/" + prompt + ".npz"
         if not os.path.exists(prompt_path):
             raise ValueError(f"Cannot find prompt {prompt}")
         prompt_data = np.load(prompt_path)
@@ -169,9 +169,9 @@ def generate_audio_from_long_text(text, prompt=None, language='auto', accent='no
     if prompt is not None and prompt != "":
         prompt_path = prompt
         if not os.path.exists(prompt_path):
-            prompt_path = "./presets/" + prompt + ".npz"
+            prompt_path = "/presets/" + prompt + ".npz"
         if not os.path.exists(prompt_path):
-            prompt_path = "./customs/" + prompt + ".npz"
+            prompt_path = "/customs/" + prompt + ".npz"
         if not os.path.exists(prompt_path):
             raise ValueError(f"Cannot find prompt {prompt}")
         prompt_data = np.load(prompt_path)
