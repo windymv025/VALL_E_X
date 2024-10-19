@@ -52,7 +52,7 @@ from torch.utils.tensorboard import SummaryWriter
 from train_utils.utils import *
 from train_utils.icefall.utils import *
 from train_utils.lhotse.utils import *
-from test import get_model
+from test import get_valle_model
 from customs.make_custom_dataset import create_dataset
 
 LRSchedulerType = torch.optim.lr_scheduler._LRScheduler
@@ -880,7 +880,7 @@ def run(rank, world_size, args):
     logging.info(params)
 
     logging.info("About to create model")
-    model, codec, vocos = get_model(device)
+    model, codec, vocos = get_valle_model(device)
 
     num_param = sum([p.numel() for p in model.parameters()])
     logging.info(f"Number of model parameters: {num_param}")
