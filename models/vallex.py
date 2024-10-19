@@ -749,11 +749,16 @@ class VALLE(VALLF):
         )
         self.language_ID = {
             'en': 0,
+            'vi': 1,
             'zh': 1,
-            'vi': 3
+            'ja': 2
         }
-        self.ar_language_embedding = TokenEmbedding(d_model, len(self.language_ID))
-        self.nar_language_embedding = TokenEmbedding(d_model, len(self.language_ID))
+        # self.ar_language_embedding = TokenEmbedding(d_model, len(self.language_ID))
+        # self.nar_language_embedding = TokenEmbedding(d_model, len(self.language_ID))
+
+        # Because pretrain model just has vocab_size = 3
+        self.ar_language_embedding = TokenEmbedding(d_model, 3)
+        self.nar_language_embedding = TokenEmbedding(d_model, 3)
 
     def forward(
         self,
