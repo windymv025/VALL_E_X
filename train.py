@@ -465,28 +465,27 @@ def save_checkpoint(
     """
     if rank != 0:
         return
-    if params.cur_epoch % params.save_every == 0:
-        print(f"Saving checkpoint model at epoch {params.cur_epoch}")
-        filename = params.exp_dir / f"checkpoint.pt"
-        save_checkpoint_impl(
-            filename=filename,
-            model=model,
-            model_avg=model_avg,
-            params=params,
-            optimizer=optimizer,
-            scheduler=scheduler,
-            sampler=sampler,
-            scaler=scaler,
-            rank=rank,
-        )
+    print(f"Saving checkpoint model at epoch {params.cur_epoch}")
+    filename = params.exp_dir / f"checkpoint.pt"
+    save_checkpoint_impl(
+        filename=filename,
+        model=model,
+        model_avg=model_avg,
+        params=params,
+        optimizer=optimizer,
+        scheduler=scheduler,
+        sampler=sampler,
+        scaler=scaler,
+        rank=rank,
+    )
 
-        if params.best_train_epoch == params.cur_epoch:
-            best_train_filename = params.exp_dir / "best-train-loss.pt"
-            copyfile(src=filename, dst=best_train_filename)
+    if params.best_train_epoch == params.cur_epoch:
+        best_train_filename = params.exp_dir / "best-train-loss.pt"
+        copyfile(src=filename, dst=best_train_filename)
 
-        if params.best_valid_epoch == params.cur_epoch:
-            best_valid_filename = params.exp_dir / "best-valid-loss.pt"
-            copyfile(src=filename, dst=best_valid_filename)
+    if params.best_valid_epoch == params.cur_epoch:
+        best_valid_filename = params.exp_dir / "best-valid-loss.pt"
+        copyfile(src=filename, dst=best_valid_filename)
 
 def compute_loss(
     params: AttributeDict,

@@ -302,7 +302,8 @@ def save_checkpoint_with_global_batch_idx(
     """
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    filename = out_dir / f"checkpoint-{global_batch_idx}.pt"
+    print(f"Saving model checkpoint with global batch IDX is {global_batch_idx}")
+    filename = out_dir / "checkpoint-global-batch.pt"
     save_checkpoint_impl(
         filename=filename,
         model=model,
