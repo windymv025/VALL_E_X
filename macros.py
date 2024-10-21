@@ -35,10 +35,17 @@ code2lang = {
     3: "vi",
 }
 
+vi_code = 'vi'
+zh_code = 'zh'
+en_code = 'en'
+ja_code = 'ja'
+
 langdropdown2token = {
     'English': "[EN]",
-    '中文': "[ZH]",
-    '日本語': "[JA]",
-    'Tiếng Việt': "VI",
+    'Chinese': "[ZH]",
+    'Japanese': "[JA]",
+    'Vietnamese': "[VI]",
     'Mix': "",
 }
+
+language_options = ['no-accent', 'English', 'Chinese', 'Japanese', 'Vietnamese']

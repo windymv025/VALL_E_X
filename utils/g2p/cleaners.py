@@ -45,7 +45,7 @@ def cje_cleaners(text):
         elif "[JA]" in text_segment:
             lang = 'ja'
         elif "[VI]" in text_segment:
-            lang = 'vi'
+            lang = 'ja'
         else:
             raise ValueError("If you see this error, please report this bug to issues.")
         outputs += phon

@@ -5,7 +5,6 @@ import pathlib
 import time
 import tempfile
 import platform
-import webbrowser
 import sys
 
 print(f"default encoding is {sys.getdefaultencoding()},file system encoding is {sys.getfilesystemencoding()}")
@@ -252,8 +251,6 @@ def make_prompt(name, wav, sr, save=True):
 
 from utils.sentence_cutter import split_text_into_sentences
 
-
-@torch.no_grad()
 def infer_long_text(text, preset_prompt, prompt=None, language='auto', accent='no-accent'):
     """
     For long audio generation, two modes are available.
@@ -373,60 +370,3 @@ def infer_long_text(text, preset_prompt, prompt=None, language='auto', accent='n
         return 24000, samples.squeeze(0).cpu().numpy()
     else:
         raise ValueError(f"No such mode {mode}")
-
-
-def main():
-    app = gr.Blocks(title="TTS and Voice Clone")
-    with app:
-        with gr.Tab("Text to Speech"):
-            with gr.Row():
-                with gr.Column():
-                    textbox_4 = gr.TextArea(label="Text",
-                                            placeholder="Type your sentence here",
-                                            value=long_text_example, elem_id=f"tts-input")
-                    language_dropdown_4 = gr.Dropdown(choices=language_options,
-                                                      value='auto-detect',
-                                                      label='language')
-                    accent_dropdown_4 = gr.Dropdown(choices=language_options,
-                                                    value='no-accent',
-                                                    label='accent')
-
-                with gr.Column():
-                    preset_dropdown_4 = gr.Dropdown(choices=preset_list, value=None, label='Voice preset')
-                    prompt_file_4 = gr.File(file_count='single', file_types=['.npz'], interactive=True)
-                    audio_output_4 = gr.Audio(label="Output Audio", elem_id="tts-audio")
-                    btn_4 = gr.Button("Generate!")
-                    btn_4.click(infer_long_text,
-                                inputs=[textbox_4, preset_dropdown_4, prompt_file_4, language_dropdown_4,
-                                        accent_dropdown_4],
-                                outputs=[audio_output_4])
-        with gr.Tab("Make prompt for voice clone"):
-            with gr.Row():
-                with gr.Column():
-                    textbox2 = gr.TextArea(label="Prompt name",
-                                           placeholder="Name your prompt here",
-                                           value="prompt_1", elem_id=f"prompt-name")
-                    textbox_transcript2 = gr.TextArea(label="Transcript",
-                                                      placeholder="Write transcript here. (leave empty to use whisper)",
-                                                      value="", elem_id=f"prompt-name")
-                    upload_audio_prompt_2 = gr.Audio(label='uploaded audio prompt', source='upload', interactive=True)
-                    record_audio_prompt_2 = gr.Audio(label='recorded audio prompt', source='microphone',
-                                                     interactive=True)
-                with gr.Column():
-                    text_output_2 = gr.Textbox(label="Message")
-                    prompt_output_2 = gr.File(interactive=False)
-                    btn_2 = gr.Button("Make!")
-                    btn_2.click(make_npz_prompt,
-                                inputs=[textbox2, upload_audio_prompt_2, record_audio_prompt_2, textbox_transcript2],
-                                outputs=[text_output_2, prompt_output_2])
-
-    webbrowser.open("http://127.0.0.1:7860")
-    app.launch()
-
-
-if __name__ == "__main__":
-    formatter = (
-        "%(asctime)s %(levelname)s [%(filename)s:%(lineno)d] %(message)s"
-    )
-    logging.basicConfig(format=formatter, level=logging.INFO)
-    main()
