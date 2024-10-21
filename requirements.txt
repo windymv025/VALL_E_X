@@ -8,7 +8,7 @@ encodec
 langid
 wget
 unidecode
-pyopenjtalk-prebuilt
+torchmetrics
 pypinyin
 inflect
 cn2an
@@ -26,3 +26,5 @@ vinorm
 underthesea
 eng_to_ipa
 viphoneme
+pyopenjtalk
+pyopenjtalk-prebuilt
