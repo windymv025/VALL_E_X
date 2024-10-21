@@ -23,3 +23,5 @@ sudachipy
 sudachidict_core
 vocos
 vinorm
+underthesea
+viphoneme
