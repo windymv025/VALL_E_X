@@ -26,4 +26,3 @@ vinorm
 underthesea
 eng_to_ipa
 viphoneme
-pyopenjtalk
