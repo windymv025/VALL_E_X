@@ -6,7 +6,7 @@ nltk.download('omw-1.4')
 
 import jieba
 import sudachipy
-import langid
+import py3langid as langid
 langid.set_languages(['en', 'zh', 'ja', 'vi'])
 
 def split_text_into_sentences(text):

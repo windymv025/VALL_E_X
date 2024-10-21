@@ -3,7 +3,7 @@ import os
 import torch
 from vocos import Vocos
 import logging
-import langid
+import py3langid as langid
 langid.set_languages(['en', 'zh', 'ja', 'vi'])
 
 import pathlib
