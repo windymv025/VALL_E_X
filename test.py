@@ -86,9 +86,4 @@ def get_valle_model(device):
         num_quantizers=NUM_QUANTIZERS,
     ).to(device)
 
-    # Encodec
-    codec = AudioTokenizer(device)
-
-    vocos = Vocos.from_pretrained('charactr/vocos-encodec-24khz').to(device)
-
-    return model, codec, vocos
+    return model
