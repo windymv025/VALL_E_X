@@ -9,6 +9,7 @@ from data.tokenizer import (
 )
 from data.collation import get_text_token_collater
 from models.vallex import VALLE
+
 if torch.cuda.is_available():
     device = torch.device("cuda", 0)
 from vocos import Vocos
@@ -21,6 +22,7 @@ print("Operating System:", plt)
 
 if plt == 'Linux':
     pathlib.WindowsPath = pathlib.PosixPath
+
 
 def get_model(device):
     url = 'https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt'
@@ -65,7 +67,25 @@ def get_model(device):
 
     # Encodec
     codec = AudioTokenizer(device)
-    
+
     vocos = Vocos.from_pretrained('charactr/vocos-encodec-24khz').to(device)
-    
+
     return model, codec, vocos
+
+
+def get_valle_model(device):
+    # VALL-E
+    model = VALLE(
+        N_DIM,
+        NUM_HEAD,
+        NUM_LAYERS,
+        norm_first=True,
+        add_prenet=False,
+        prefix_mode=PREFIX_MODE,
+        share_embedding=True,
+        nar_scale_factor=1.0,
+        prepend_bos=True,
+        num_quantizers=NUM_QUANTIZERS,
+    ).to(device)
+
+    return model
