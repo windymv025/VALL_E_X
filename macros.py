@@ -48,4 +48,5 @@ langdropdown2token = {
     'Mix': "",
 }
 
-language_options = ['no-accent', 'English', 'Chinese', 'Japanese', 'Vietnamese']
+language_options = ['auto-detect', 'English', 'Chinese', 'Japanese', 'Vietnamese']
+accent_options = ['no-accent', 'English', 'Chinese', 'Japanese', 'Vietnamese']

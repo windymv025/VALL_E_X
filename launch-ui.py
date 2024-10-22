@@ -387,7 +387,7 @@ def main():
                     language_dropdown_4 = gr.Dropdown(choices=language_options,
                                                       value='auto-detect',
                                                       label='language')
-                    accent_dropdown_4 = gr.Dropdown(choices=language_options,
+                    accent_dropdown_4 = gr.Dropdown(choices=accent_options,
                                                     value='no-accent',
                                                     label='accent')
 
