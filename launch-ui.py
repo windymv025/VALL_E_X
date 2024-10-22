@@ -329,8 +329,8 @@ def infer_long_text(text, preset_prompt, prompt=None, language='auto', accent='n
         samples = vocos.decode(features, bandwidth_id=torch.tensor([2], device=device))
 
         model.to('cpu')
-        message = f"Cut into {len(sentences)} sentences"
-        return message, (24000, samples.squeeze(0).cpu().numpy())
+        print(f"Cut into {len(sentences)} sentences")
+        return 24000, samples.squeeze(0).cpu().numpy()
     elif mode == "sliding-window":
         complete_tokens = torch.zeros([1, NUM_QUANTIZERS, 0]).type(torch.LongTensor).to(device)
         original_audio_prompts = audio_prompts
