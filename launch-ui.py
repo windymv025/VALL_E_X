@@ -421,7 +421,7 @@ def main():
                                 outputs=[text_output_2, prompt_output_2])
 
     webbrowser.open("http://127.0.0.1:7860")
-    app.launch()
+    app.launch(share=True)
 
 
 if __name__ == "__main__":

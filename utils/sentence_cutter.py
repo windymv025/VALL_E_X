@@ -43,7 +43,10 @@ def split_text_into_sentences(text):
             sentences.append(current_sentence)
 
         return sentences
+    elif langid.classify(text)[0] == "vi":
+        sentences = nltk.tokenize.sent_tokenize(text)
 
+        return sentences
     raise RuntimeError("It is impossible to reach here.")
 
 long_text = """
