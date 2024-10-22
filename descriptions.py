@@ -28,4 +28,4 @@ Very long text is chunked into several sentences, and each sentence is synthesiz
 Please make a prompt or use a preset prompt to infer long text.
 """
 
-long_text_example = "Speech processing is a field in computer science and artificial intelligence that involves the analysis, processing, and understanding of human spoken language. The main goal of speech processing is to enable computers to recognize, analyze, and respond to human speech in a natural and efficient manner."
+long_text_example = "Hello master, can I help you?"

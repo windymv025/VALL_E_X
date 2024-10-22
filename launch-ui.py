@@ -1,3 +1,4 @@
+
 # coding: utf-8
 import logging
 import os
@@ -83,8 +84,24 @@ checkpoint = torch.load("./checkpoints/vallex-checkpoint.pt", map_location='cpu'
 missing_keys, unexpected_keys = model.load_state_dict(
     checkpoint["model"], strict=True
 )
-assert not missing_keys
 model.eval()
+
+model_vi = VALLE(
+    N_DIM,
+    NUM_HEAD,
+    NUM_LAYERS,
+    norm_first=True,
+    add_prenet=False,
+    prefix_mode=PREFIX_MODE,
+    share_embedding=True,
+    nar_scale_factor=1.0,
+    prepend_bos=True,
+    num_quantizers=NUM_QUANTIZERS,
+)
+checkpoint_vi = torch.load("./checkpoints/vallex-checkpoint-fine-tune.pt", map_location='cpu')
+model_vi.load_state_dict(
+    checkpoint_vi["model"], strict=True
+)
 
 # Encodec model
 audio_tokenizer = AudioTokenizer(device)
@@ -109,13 +126,18 @@ preset_list = [preset[:-4] for preset in preset_list if preset.endswith(".npz")]
 
 
 def inference_encoded_frames(text_tokens, text_tokens_lens, audio_prompts, enroll_x_lens, lang_pr, langs, accent, lang):
+    global model_vi, model
+
+    inf_model = model
+
     if lang_pr == vi_code:
         lang_pr = zh_code
+        inf_model = model_vi
 
     if lang == vi_code:
         lang = ja_code
 
-    encoded_frames = model.inference(
+    encoded_frames = inf_model.inference(
         text_tokens.to(device),
         text_tokens_lens.to(device),
         audio_prompts,
@@ -284,7 +306,7 @@ def infer_long_text(text, preset_prompt, prompt=None, language='auto', accent='n
         # numpy to tensor
         audio_prompts = torch.tensor(audio_prompts).type(torch.int32).to(device)
         text_prompts = torch.tensor(text_prompts).type(torch.int32)
-    elif preset_prompt is not None and preset_prompt != "":
+    elif preset_prompt is not None and preset_prompt != "" and preset_prompt != []:
         prompt_data = np.load(os.path.join("./presets/", f"{preset_prompt}.npz"))
         audio_prompts = prompt_data['audio_tokens']
         text_prompts = prompt_data['text_tokens']
