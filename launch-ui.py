@@ -431,8 +431,8 @@ def main():
                     textbox_transcript2 = gr.TextArea(label="Transcript",
                                                       placeholder="Write transcript here. (leave empty to use whisper)",
                                                       value="", elem_id=f"prompt-name")
-                    upload_audio_prompt_2 = gr.Audio(label='uploaded audio prompt', source='upload', interactive=True)
-                    record_audio_prompt_2 = gr.Audio(label='recorded audio prompt', source='microphone',
+                    upload_audio_prompt_2 = gr.Audio(label='uploaded audio prompt', sources='upload', interactive=True)
+                    record_audio_prompt_2 = gr.Audio(label='recorded audio prompt', sources='microphone',
                                                      interactive=True)
                 with gr.Column():
                     text_output_2 = gr.Textbox(label="Message")
