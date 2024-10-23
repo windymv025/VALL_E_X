@@ -443,7 +443,7 @@ def main():
                                 outputs=[text_output_2, prompt_output_2])
 
     webbrowser.open("http://127.0.0.1:7860")
-    app.launch(share=True)
+    app.launch(share=True, server_name="0.0.0.0", server_port=7860)
 
 
 if __name__ == "__main__":
