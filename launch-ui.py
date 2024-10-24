@@ -22,7 +22,7 @@ else:
     pathlib.WindowsPath = pathlib.PosixPath
 os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 
-import py3langid as langid
+import langid
 
 langid.set_languages(['en', 'zh', 'ja', 'vi'])
 

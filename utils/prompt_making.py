@@ -2,7 +2,7 @@ import os
 import torch
 import torchaudio
 import logging
-import py3langid as langid
+import langid
 import whisper
 langid.set_languages(['en', 'zh', 'ja', 'vi'])
 

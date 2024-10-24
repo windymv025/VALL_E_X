@@ -6,6 +6,7 @@ torchaudio
 tokenizers
 encodec
 py3langid
+langid
 wget
 unidecode
 torchmetrics
